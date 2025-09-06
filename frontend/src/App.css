@@ -1,34 +1,172 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Custom styles for O Mestre do Bicho */
+
+.App {
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+/* Animações personalizadas */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.8);
+  }
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-.App-link {
-    color: #61dafb;
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Cards de modalidades */
+.modalidade-card {
+  @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-all duration-300 cursor-pointer transform hover:scale-105;
+}
+
+.modalidade-card:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Botões de palpites */
+.palpite-button {
+  @apply bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105;
+}
+
+.palpite-button:hover {
+  box-shadow: 0 5px 20px rgba(34, 197, 94, 0.4);
+}
+
+/* Grid de números */
+.numeros-grid {
+  @apply grid gap-2 max-h-96 overflow-y-auto;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+}
+
+.numero-item {
+  @apply bg-white/20 backdrop-blur border border-white/30 rounded-lg p-3 text-white font-mono font-bold text-center hover:bg-white/30 transition-colors cursor-pointer;
+}
+
+/* Área de texto copiável */
+.texto-copiavel {
+  @apply bg-black/20 border border-white/30 rounded-lg p-4 text-white font-mono text-sm max-h-32 overflow-y-auto;
+}
+
+/* Cards de histórico */
+.historico-card {
+  @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 hover:bg-white/15 transition-colors;
+}
+
+/* Badges de status */
+.badge-acerto {
+  @apply bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold;
+}
+
+.badge-erro {
+  @apply bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold;
+}
+
+.badge-pendente {
+  @apply bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold;
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+  .modalidade-card {
+    @apply p-4;
+  }
+  
+  .numeros-grid {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  }
+  
+  .numero-item {
+    @apply p-2 text-sm;
+  }
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Estados de loading */
+.loading-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Efeitos especiais para bichos */
+.bicho-emoji {
+  @apply text-4xl inline-block;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.bicho-card {
+  @apply modalidade-card relative overflow-hidden;
+}
+
+.bicho-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bicho-card:hover::before {
+  opacity: 1;
+}
+
+/* Mensagens de feedback */
+.feedback-success {
+  @apply bg-green-600/20 border border-green-500/30 text-green-100 p-4 rounded-lg backdrop-blur-sm;
+}
+
+.feedback-warning {
+  @apply bg-yellow-600/20 border border-yellow-500/30 text-yellow-100 p-4 rounded-lg backdrop-blur-sm;
+}
+
+.feedback-error {
+  @apply bg-red-600/20 border border-red-500/30 text-red-100 p-4 rounded-lg backdrop-blur-sm;
 }
